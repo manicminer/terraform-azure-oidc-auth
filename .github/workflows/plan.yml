@@ -1,5 +1,5 @@
 ---
-name: PR Plan
+name: Plan
 on:
   pull_request:
     types: ['opened', 'synchronize']

@@ -1,5 +1,5 @@
 ---
-name: PR Plan
+name: Apply
 on:
   push:
     branches:
