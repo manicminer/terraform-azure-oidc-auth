@@ -15,6 +15,6 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "test" {
   name     = "aaatest-oidc-auth"
-  location = "westeu"
+  location = "westeurope"
 }
 
