@@ -21,7 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.0-beta
+
       - run: terraform init
 
       - id: apply
