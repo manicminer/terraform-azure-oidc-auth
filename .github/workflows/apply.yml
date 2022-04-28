@@ -1,5 +1,5 @@
 ---
-name: PR Plan
+name: Apply
 on:
   push:
     branches:
@@ -21,11 +21,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.0-beta1
+
       - run: terraform init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
+          TF_IN_AUTOMATION: true
+
+      - id: validate
+        run: terraform validate
+        env:
+          TF_IN_AUTOMATION: true
+
       - id: apply
         run: terraform apply -auto-approve -no-color
-      - run: echo ${{ steps.apply.outputs.stdout }}
-      - run: echo ${{ steps.apply.outputs.stderr }}
-      - run: echo ${{ steps.apply.outputs.exitcode }}
-
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
+          TF_IN_AUTOMATION: true
