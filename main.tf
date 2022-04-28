@@ -4,6 +4,7 @@ terraform {
     storage_account_name = "tbamfordauthtestingdonot"
     container_name       = "backend-oidc"
     key                  = "terraform.tfstate"
+    use_oidc             = true
   }
 
   required_providers {
