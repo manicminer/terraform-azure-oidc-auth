@@ -27,6 +27,13 @@ jobs:
           terraform_version: 1.2.0-beta1
 
       - run: terraform init
+        env:
+          TF_IN_AUTOMATION: true
+
+      - id: validate
+        run: terraform validate
+        env:
+          TF_IN_AUTOMATION: true
 
       - id: apply
         run: terraform apply -auto-approve -no-color
@@ -34,4 +41,5 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
           TF_IN_AUTOMATION: true
