@@ -1,4 +1,11 @@
 terraform {
+  backend "azurerm" {
+    resource_group_name  = "tbamford-auth-testing-donotdelete_group"
+    storage_account_name = "tbamfordauthtestingdonot"
+    container_name       = "backend-oidc"
+    key                  = "terraform.tfstate"
+  }
+
   required_providers {
     azurerm = {
       source  = "manicminer/azurerm"
